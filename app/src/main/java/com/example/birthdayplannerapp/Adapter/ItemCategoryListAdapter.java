@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,14 +20,14 @@ import com.example.birthdayplannerapp.R;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
+public class ItemCategoryListAdapter extends RecyclerView.Adapter<ItemCategoryListAdapter.myViewHolder>{
 
     List<String> titles;
     List<Integer> images;
     LayoutInflater inflater;
     Activity activity;
 
-    public  Adapter(Context context, List<String> titles, List<Integer> images, Activity activity){
+    public ItemCategoryListAdapter(Context context, List<String> titles, List<Integer> images, Activity activity){
         this.titles=titles;
         this.images=images;
         this.activity=activity;
@@ -37,14 +36,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder>{
 
     @NonNull
     @Override
-    public Adapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ItemCategoryListAdapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.list_item, parent, false);
         return  new myViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.myViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ItemCategoryListAdapter.myViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.title.setText(titles.get(position));
         holder.img.setImageResource(images.get(position));
         //holder.linearLayout.setAlpha(0.8F);

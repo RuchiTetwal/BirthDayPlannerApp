@@ -6,11 +6,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.birthdayplannerapp.Dao.GuestsDao;
 import com.example.birthdayplannerapp.Dao.ItemsDao;
+import com.example.birthdayplannerapp.Models.Guests;
 import com.example.birthdayplannerapp.Models.Items;
 
 
-@Database(entities = Items.class, version = 1, exportSchema = false)
+@Database(entities = {Items.class, Guests.class}, version = 1, exportSchema = false)
 public abstract class RoomDb extends RoomDatabase {
 
     private static RoomDb database;
@@ -26,4 +28,6 @@ public abstract class RoomDb extends RoomDatabase {
     }
 
     public abstract ItemsDao mainDao();
+    public abstract GuestsDao guestsDao();
+
 }

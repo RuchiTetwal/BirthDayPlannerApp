@@ -4,14 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
-import com.example.birthdayplannerapp.Adapter.Adapter;
+import com.example.birthdayplannerapp.Adapter.ItemCategoryListAdapter;
 import com.example.birthdayplannerapp.Constants.ItemTypeConstants;
-import com.example.birthdayplannerapp.Database.AppData;
-import com.example.birthdayplannerapp.Database.RoomDb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +17,7 @@ public class ItemListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<String> titles;
     List<Integer> images;
-    Adapter adapter;
+    ItemCategoryListAdapter adapter;
 
 
 
@@ -38,7 +34,7 @@ public class ItemListActivity extends AppCompatActivity {
 
 
 
-        adapter = new Adapter(this, titles, images, ItemListActivity.this);
+        adapter = new ItemCategoryListAdapter(this, titles, images, ItemListActivity.this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);

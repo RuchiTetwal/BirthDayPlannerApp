@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.AsyncListDiffer;
 
 import com.example.birthdayplannerapp.Constants.ItemTypeConstants;
+import com.example.birthdayplannerapp.Models.Guests;
 import com.example.birthdayplannerapp.Models.Items;
 
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ import java.util.ListIterator;
 public class AppData extends Application {
 
     RoomDb database;
-    String category;
     Context context;
 
     public  static  final String LAST_VERSION= "LAST_VERSION";
@@ -118,14 +118,10 @@ public class AppData extends Application {
         System.out.println("item data added to DB");
     }
 
+
     public void persistDataByCategory(String category){
         try{
             List<Items> list = deleteAllAndGetListByCategory(category);
-
-//            for(Items item:list){
-//                database.mainDao().saveItem(item);
-//            }
-
             Toast.makeText(context, "All items of "+category+" deleted successfully", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
@@ -160,4 +156,21 @@ public class AppData extends Application {
 
         }
     }
+
+    public void persistGuestData(){
+        try{
+            deleteAllGuestsAndGetList();
+            Toast.makeText(context, "All guest deleted successfully", Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    void deleteAllGuestsAndGetList(){
+        database.guestsDao().deleteAllGuests();
+    }
+
+
 }
