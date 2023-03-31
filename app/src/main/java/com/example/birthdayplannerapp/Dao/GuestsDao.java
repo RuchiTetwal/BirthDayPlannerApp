@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.birthdayplannerapp.Models.Guests;
-import com.example.birthdayplannerapp.Models.Items;
 
 import java.util.List;
 
@@ -15,10 +14,10 @@ import java.util.List;
 public interface GuestsDao {
 
     @Insert(onConflict = REPLACE)
-    void saveItem(Guests guest);
+    void saveGuest(Guests guest);
 
     @Query("select * from guests order by guestname asc")
-    List<Items> getAllGuests();
+    List<Guests> getAllGuests();
 
     @Delete
     void  deleteGuest(Guests guest);
@@ -33,5 +32,5 @@ public interface GuestsDao {
     Integer deleteAllGuests();
 
     @Query("select * from guests where ischecked=:isChecked order by guestname asc")
-    List<Items> getAllSelectedGuests(Boolean isChecked);
+    List<Guests> getAllSelectedGuests(Boolean isChecked);
 }

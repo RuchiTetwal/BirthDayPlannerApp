@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.birthdayplannerapp.Adapter.CheckListAdapter;
+import com.example.birthdayplannerapp.Adapter.ItemCheckListAdapter;
 import com.example.birthdayplannerapp.Constants.ItemTypeConstants;
 import com.example.birthdayplannerapp.Database.AppData;
 import com.example.birthdayplannerapp.Database.RoomDb;
@@ -31,10 +31,10 @@ import com.example.birthdayplannerapp.Models.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckList extends AppCompatActivity {
+public class ItemsCheckList extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    CheckListAdapter checkListAdapter;
+    ItemCheckListAdapter checkListAdapter;
     RoomDb database;
     List<Items> itemsList  = new ArrayList<>();
     String header, isShow;
@@ -78,17 +78,16 @@ public class CheckList extends AppCompatActivity {
         return  super.onCreatePanelMenu(featureId,menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Intent intent = new Intent(this, CheckList.class);
+        Intent intent = new Intent(this, ItemsCheckList.class);
         AppData appData= new AppData(database, this);
 
         switch (item.getItemId()) {
             case R.id.deleteAllBtn:
 
-                new AlertDialog.Builder(CheckList.this).setTitle("Delete All items of "+header+" category")
+                new AlertDialog.Builder(ItemsCheckList.this).setTitle("Delete All items of "+header+" category")
                         .setMessage("Are you sure?")
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
@@ -115,7 +114,7 @@ public class CheckList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_list);
+        setContentView(R.layout.activity_items_check_list);
 
         Intent intent = getIntent();
         header = intent.getStringExtra("header");
@@ -151,10 +150,10 @@ public class CheckList extends AppCompatActivity {
 
                 if(itemNameText!=null&& !itemNameText.isEmpty()){
                     addNewItemToList(itemNameText);
-                    Toast.makeText(CheckList.this, "New Item Added",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ItemsCheckList.this, "New Item Added",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(CheckList.this, "New Item Added",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ItemsCheckList.this, "New Item Added",Toast.LENGTH_SHORT).show();
                 }
 
                 InputMethodManager imm = (InputMethodManager) txtItemAdd.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -180,7 +179,7 @@ public class CheckList extends AppCompatActivity {
     private  void  updateRecycler(List<Items> itemsList){
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL));
-        checkListAdapter = new CheckListAdapter(CheckList.this, itemsList, database, isShow, header);
+        checkListAdapter = new ItemCheckListAdapter(ItemsCheckList.this, itemsList, database, isShow, header);
         recyclerView.setAdapter(checkListAdapter);
     }
 }

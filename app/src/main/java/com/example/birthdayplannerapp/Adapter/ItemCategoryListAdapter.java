@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.birthdayplannerapp.CheckList;
+import com.example.birthdayplannerapp.ItemsCheckList;
 import com.example.birthdayplannerapp.Constants.ItemTypeConstants;
 import com.example.birthdayplannerapp.R;
 
@@ -52,7 +52,7 @@ public class ItemCategoryListAdapter extends RecyclerView.Adapter<ItemCategoryLi
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(view.getContext(), CheckList.class);
+                Intent i = new Intent(view.getContext(), ItemsCheckList.class);
                 i.putExtra("header", titles.get(position));
                 if(ItemTypeConstants.MySelections.equals(titles.get(position)) || ItemTypeConstants.MyList.equals(titles.get(position))){
                     i.putExtra("isShow", "false");

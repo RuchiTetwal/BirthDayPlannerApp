@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CheckListItem extends AppCompatActivity {
+public class ItemsCheckListSingleItem extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_list_item);
+        setContentView(R.layout.activity_items_check_list_item);
     }
 }

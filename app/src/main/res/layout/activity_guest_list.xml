@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F0F2F6"
-    tools:context=".CheckList">
+    tools:context=".ItemsCheckList">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/checkGuestListRecyclerView"
@@ -77,7 +77,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/addItemBtn"
+            android:id="@+id/addGuestBtn"
             android:layout_width="@dimen/_55sdp"
             android:layout_height="@dimen/_55sdp"
             android:layout_marginVertical="@dimen/_18sdp"

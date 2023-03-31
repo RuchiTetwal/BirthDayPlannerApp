@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         addAppData();
         database = RoomDb.getInstance(this);
-        System.out.println("------   *  "+database.mainDao().getAllSelected(false).get(0).getItemname());
+
 
         openCardActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override

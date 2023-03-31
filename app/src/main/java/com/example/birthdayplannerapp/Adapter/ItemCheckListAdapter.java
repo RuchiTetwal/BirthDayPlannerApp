@@ -22,7 +22,7 @@ import com.example.birthdayplannerapp.R;
 
 import java.util.List;
 
-public class CheckListAdapter extends RecyclerView.Adapter<CheckListViewHolder>{
+public class ItemCheckListAdapter extends RecyclerView.Adapter<ItemCheckListViewHolder>{
 
     Context context;
     List<Items> itemsList;
@@ -31,11 +31,11 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListViewHolder>{
 
     String header;
 
-    public CheckListAdapter(){
+    public ItemCheckListAdapter(){
 
     }
 
-    public CheckListAdapter(Context context, List<Items> itemsList, RoomDb database, String isShow, String header) {
+    public ItemCheckListAdapter(Context context, List<Items> itemsList, RoomDb database, String isShow, String header) {
         this.context = context;
         this.itemsList = itemsList;
         this.database = database;
@@ -48,15 +48,15 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListViewHolder>{
 
     @NonNull
     @Override
-    public CheckListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CheckListViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_check_list_item, parent, false));
+    public ItemCheckListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ItemCheckListViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_items_check_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CheckListViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ItemCheckListViewHolder holder, @SuppressLint("RecyclerView") int position) {
             holder.itemListCheckBox.setText(itemsList.get(position).getItemname());
             holder.itemListCheckBox.setChecked(itemsList.get(position).getIschecked());
-            holder.itemLinearlayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.rounded_border));
+            holder.itemLinearlayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.rounded_border_grey));
 
             if(isShow.equals("false")  ){
                 holder.itemDeleteBtn.setVisibility(View.GONE);
@@ -127,14 +127,14 @@ public class CheckListAdapter extends RecyclerView.Adapter<CheckListViewHolder>{
     }
 }
 
-class CheckListViewHolder extends  RecyclerView.ViewHolder{
+class ItemCheckListViewHolder extends  RecyclerView.ViewHolder{
 
     LinearLayout itemLinearlayout;
     CheckBox itemListCheckBox;
     Button itemDeleteBtn;
 
 
-    public CheckListViewHolder(@NonNull View itemView) {
+    public ItemCheckListViewHolder(@NonNull View itemView) {
         super(itemView);
 
         itemListCheckBox=itemView.findViewById(R.id.itemListCheckbox);
