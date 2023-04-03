@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F2F6"
+    android:background="#F5FFFF"
     tools:context=".ItemsCheckList">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,7 +23,7 @@
         android:id="@+id/checkGuestListLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_90sdp"
-        android:background="#C7D0E1"
+        android:background="#CAEBEF"
         android:orientation="horizontal"
         android:textAlignment="center"
         app:flow_horizontalAlign="center"
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.996">
 
         <Button
-            android:id="@+id/openContactButton"
+            android:id="@+id/readContactButton"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginLeft="@dimen/_5sdp"
