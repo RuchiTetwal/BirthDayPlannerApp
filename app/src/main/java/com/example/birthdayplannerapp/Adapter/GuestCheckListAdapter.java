@@ -1,9 +1,14 @@
 package com.example.birthdayplannerapp.Adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +59,10 @@ public class GuestCheckListAdapter extends RecyclerView.Adapter<GuestCheckListVi
         holder.guestListCheckBox.setChecked(guestsList.get(position).getIschecked());
         holder.guestLinearlayout.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.rounded_border_grey));
 
+        if(guestsList.get(position).getGuestemail()==null || guestsList.get(position).getGuestemail().isEmpty()){
+            holder.guestMailBtn.setVisibility(View.GONE);
+        }
+
         holder.guestListCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +109,28 @@ public class GuestCheckListAdapter extends RecyclerView.Adapter<GuestCheckListVi
 
                             }
                         }).setIcon(R.drawable.baseline_delete_24).show();
+            }
+        });
+
+        holder.guestMailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String guestName = guestsList.get(position).getGuestname();
+                String guestEmail = guestsList.get(position).getGuestemail();
+                String subject = "Birthday Invitation";
+                String message = "Hello! "+guestName +"\n\n" + "Birthdays are special and so are you, I would like to invite you to <WRITE BIRTHDAY GIRL/BOYS NAME>'s birthday party, kindly grace us with your presence."
+                         +"\n\n" + "Date and Time: " +'\n'+ "Venue: ";
+
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.setType("vnd.android.cursor.item/email");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {guestEmail});
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
+               // context.startActivity(emailIntent);
+                context.startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+
             }
         });
     }

@@ -24,21 +24,22 @@
         android:textSize="@dimen/_20sdp"/>
 
     <Button
-        android:id="@+id/guestDeleteBtn"
-        android:layout_width="@dimen/_7sdp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.7"
-        android:layout_gravity="center"
-        android:background="@drawable/baseline_delete_24"
-        />
 
-    <Button
         android:id="@+id/guestMailBtn"
         android:layout_width="@dimen/_7sdp"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
         android:layout_gravity="center"
         android:background="@drawable/email"
+        />
+
+    <Button
+        android:id="@+id/guestDeleteBtn"
+        android:layout_width="@dimen/_7sdp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:layout_gravity="center"
+        android:background="@drawable/baseline_delete_24"
         />
 
 </LinearLayout>

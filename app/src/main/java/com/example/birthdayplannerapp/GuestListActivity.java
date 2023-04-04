@@ -10,23 +10,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.birthdayplannerapp.Adapter.GuestCheckListAdapter;
+import com.example.birthdayplannerapp.Constants.ItemTypeConstants;
+import com.example.birthdayplannerapp.Database.AppData;
 import com.example.birthdayplannerapp.Database.RoomDb;
 import com.example.birthdayplannerapp.Models.Guests;
+import com.example.birthdayplannerapp.Models.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +59,81 @@ public class GuestListActivity extends AppCompatActivity {
     private static final int CONTACT_PERMISSION_CODE=1;
     private static final int CONTACT_PICK_CODE=2;
 
+
+    @Override
+    public  boolean onCreatePanelMenu(int featureId,@NonNull Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.appbar_menu, menu);
+
+
+        MenuItem menuItem = menu.findItem(R.id.searchBtn);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String searchText) {
+                List<Guests> guestSearchList = new ArrayList<>();
+
+                for(Guests guest:guestsList){
+                    if(guest.getGuestname().toLowerCase().startsWith(searchText.toLowerCase())){
+                        guestSearchList.add(guest);
+                    }
+                }
+
+                updateRecycler(guestSearchList);
+
+                return false;
+            }
+        });
+
+        return  super.onCreatePanelMenu(featureId,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent intent = new Intent(this, GuestListActivity.class);
+        AppData appData= new AppData(database, this);
+
+        switch (item.getItemId()) {
+            case R.id.deleteAllBtn:
+
+                new AlertDialog.Builder(GuestListActivity.this).setTitle("Delete All guests")
+                        .setMessage("Are you sure?")
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                appData.persistGuestData();
+                                guestsList=database.guestsDao().getAllGuests();
+                                updateRecycler(guestsList);
+
+                                guestCheckListAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).setIcon(R.drawable.baseline_delete_24).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_list);
+
+
 
         getSupportActionBar().setTitle("GuestList");
 
@@ -75,7 +155,7 @@ public class GuestListActivity extends AppCompatActivity {
                 String guestNameText = txtGuestAdd.getText().toString();
                 String guestEmailText = txtGuestEmailAdd.getText().toString();
 
-                if(isValidEmail(guestEmailText)) {
+                if(isValidEmail(guestEmailText) || guestEmailText==null || guestEmailText.isEmpty()) {
 
 
                     if (guestNameText != null && !guestNameText.isEmpty()) {
@@ -109,6 +189,8 @@ public class GuestListActivity extends AppCompatActivity {
                 }
             }
         });
+
+
 
     }
 
@@ -212,19 +294,19 @@ public class GuestListActivity extends AppCompatActivity {
                                 contactEmail=email;
 
                         }
-                        //@SuppressLint("Range") String contactEmail = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Email.ADDRESS));
 
-                        if(isValidEmail(contactEmail)) {
+//                        if(isValidEmail(contactEmail)) {
                            // addNewGuestToList(contactName, contactEmail);
                             txtGuestAdd.setText(contactName);
                             txtGuestEmailAdd.setText(contactEmail);
-                        }
-                        else{
-                            Toast.makeText(GuestListActivity.this, "InValid Email address", Toast.LENGTH_SHORT).show();
-                            cursorEmail.close();
-                            cursorName.close();
-                            return;
-                        }
+
+//                        }
+//                        else{
+//                            Toast.makeText(GuestListActivity.this, "InValid Email address", Toast.LENGTH_SHORT).show();
+//                            cursorEmail.close();
+//                            cursorName.close();
+//                            return;
+//                        }
 
                         cursorEmail.close();
                     }
