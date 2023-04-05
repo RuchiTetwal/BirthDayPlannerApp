@@ -49,16 +49,19 @@ public class AppData extends Application {
 
         return makeItemsList(ItemTypeConstants.Games,data);
     }
+
     public List<Items> getSongsData(){
         String []data = {"Happy Birthday to you..", "Badtamiz dil"};
 
         return makeItemsList(ItemTypeConstants.Songs,data);
     }
+
     public List<Items> getSnacksData(){
         String []data = {"Chips", "Cookies", "Waffles"};
 
         return makeItemsList(ItemTypeConstants.Snacks,data);
     }
+
     public List<Items> getBeveragesData(){
         String []data = {"Cold Drinks", "Mojito"};
 
@@ -70,13 +73,12 @@ public class AppData extends Application {
 
         return makeItemsList(ItemTypeConstants.Cutlery,data);
     }
+
     public List<Items> getOthersData(){
         String []data = {"Cake", "Birthday Caps"};
 
         return makeItemsList(ItemTypeConstants.Others,data);
     }
-
-
 
     public List<Items> makeItemsList(String category, String [] data){
         List<String> dataList = Arrays.asList(data);
@@ -117,7 +119,6 @@ public class AppData extends Application {
 
         System.out.println("item data added to DB");
     }
-
 
     public void persistDataByCategory(String category){
         try{
@@ -171,6 +172,5 @@ public class AppData extends Application {
     void deleteAllGuestsAndGetList(){
         database.guestsDao().deleteAllGuests();
     }
-
 
 }

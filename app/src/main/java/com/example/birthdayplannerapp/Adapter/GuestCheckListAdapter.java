@@ -42,7 +42,6 @@ public class GuestCheckListAdapter extends RecyclerView.Adapter<GuestCheckListVi
         this.guestsList = guestsList;
         this.database = database;
 
-
         if(guestsList.size()==0)
             Toast.makeText(context.getApplicationContext(), "Guest list is empty", Toast.LENGTH_SHORT).show();
     }
@@ -128,7 +127,6 @@ public class GuestCheckListAdapter extends RecyclerView.Adapter<GuestCheckListVi
                 emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {guestEmail});
                 emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
                 emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
-               // context.startActivity(emailIntent);
                 context.startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
 
             }

@@ -65,7 +65,6 @@ public class CreateBirthdayCardActivity extends AppCompatActivity {
 
                 intent.putExtra("uReceivedName", uName);
                 startActivity(intent);
-                //finish();
             }
         });
 

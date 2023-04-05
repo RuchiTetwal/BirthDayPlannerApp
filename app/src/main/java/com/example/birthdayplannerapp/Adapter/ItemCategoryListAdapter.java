@@ -46,7 +46,6 @@ public class ItemCategoryListAdapter extends RecyclerView.Adapter<ItemCategoryLi
     public void onBindViewHolder(@NonNull ItemCategoryListAdapter.myViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.title.setText(titles.get(position));
         holder.img.setImageResource(images.get(position));
-        //holder.linearLayout.setAlpha(0.8F);
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

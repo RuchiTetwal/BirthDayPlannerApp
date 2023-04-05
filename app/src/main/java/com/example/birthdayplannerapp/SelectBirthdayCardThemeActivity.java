@@ -17,10 +17,10 @@ public class SelectBirthdayCardThemeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_birthday_card_theme);
 
-        teddyB=(ImageButton)findViewById(R.id.teddyThemeButton);
-        flowerB=(ImageButton)findViewById(R.id.flowersThemeButton);
-        supermanB=(ImageButton)findViewById(R.id.supermanThemeButton);
-        balloonB=(ImageButton)findViewById(R.id.balloonThemeButton);
+        teddyB=findViewById(R.id.teddyThemeButton);
+        flowerB=findViewById(R.id.flowersThemeButton);
+        supermanB=findViewById(R.id.supermanThemeButton);
+        balloonB=findViewById(R.id.balloonThemeButton);
 
         teddyB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +29,6 @@ public class SelectBirthdayCardThemeActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectBirthdayCardThemeActivity.this, CreateBirthdayCardActivity.class);
                 intent.putExtra("selectedTheme", "Teddy");
                 startActivity(intent);
-                //finish();
             }
         });
 
@@ -40,7 +39,6 @@ public class SelectBirthdayCardThemeActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectBirthdayCardThemeActivity.this, CreateBirthdayCardActivity.class);
                 intent.putExtra("selectedTheme", "Flower");
                 startActivity(intent);
-                //finish();
             }
         });
         supermanB.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +48,6 @@ public class SelectBirthdayCardThemeActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectBirthdayCardThemeActivity.this, CreateBirthdayCardActivity.class);
                 intent.putExtra("selectedTheme", "SuperMan");
                 startActivity(intent);
-                //finish();
             }
         });
         balloonB.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +57,6 @@ public class SelectBirthdayCardThemeActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectBirthdayCardThemeActivity.this, CreateBirthdayCardActivity.class);
                 intent.putExtra("selectedTheme", "Balloon");
                 startActivity(intent);
-                //finish();
             }
         });
 

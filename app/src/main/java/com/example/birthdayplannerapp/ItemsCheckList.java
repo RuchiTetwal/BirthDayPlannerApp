@@ -53,6 +53,7 @@ public class ItemsCheckList extends AppCompatActivity {
 
         MenuItem menuItem = menu.findItem(R.id.searchBtn);
         SearchView searchView = (SearchView) menuItem.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -81,7 +82,6 @@ public class ItemsCheckList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Intent intent = new Intent(this, ItemsCheckList.class);
         AppData appData= new AppData(database, this);
 
         switch (item.getItemId()) {
@@ -169,8 +169,10 @@ public class ItemsCheckList extends AppCompatActivity {
         item.setCategory(header);
         item.setItemname(itemName);
         item.setAddedby("user");
+
         database.mainDao().saveItem(item);
         itemsList=database.mainDao().getAllItems(header);
+
         updateRecycler(itemsList);
         recyclerView.scrollToPosition(checkListAdapter.getItemCount()-1);
         txtItemAdd.setText("");

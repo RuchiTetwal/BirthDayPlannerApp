@@ -19,8 +19,6 @@ public class ItemListActivity extends AppCompatActivity {
     List<Integer> images;
     ItemCategoryListAdapter adapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +29,6 @@ public class ItemListActivity extends AppCompatActivity {
 
         addAllTitles();
         addAllImages();
-
-
 
         adapter = new ItemCategoryListAdapter(this, titles, images, ItemListActivity.this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);

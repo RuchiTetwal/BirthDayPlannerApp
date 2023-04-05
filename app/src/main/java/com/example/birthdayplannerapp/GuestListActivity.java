@@ -59,15 +59,14 @@ public class GuestListActivity extends AppCompatActivity {
     private static final int CONTACT_PERMISSION_CODE=1;
     private static final int CONTACT_PICK_CODE=2;
 
-
     @Override
     public  boolean onCreatePanelMenu(int featureId,@NonNull Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.appbar_menu, menu);
 
-
         MenuItem menuItem = menu.findItem(R.id.searchBtn);
         SearchView searchView = (SearchView) menuItem.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -133,9 +132,7 @@ public class GuestListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest_list);
 
-
-
-        getSupportActionBar().setTitle("GuestList");
+        getSupportActionBar().setTitle("Guest List");
 
         recyclerView = findViewById(R.id.checkGuestListRecyclerView);
         txtGuestAdd = findViewById(R.id.guestNameEditText);
@@ -189,9 +186,6 @@ public class GuestListActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 
     private boolean isValidEmail(String email){
@@ -210,8 +204,6 @@ public class GuestListActivity extends AppCompatActivity {
         txtGuestAdd.setText("");
         txtGuestEmailAdd.setText("");
     }
-
-
 
     private  void  updateRecycler(List<Guests> guestsList){
         recyclerView.setHasFixedSize(true);
@@ -268,8 +260,6 @@ public class GuestListActivity extends AppCompatActivity {
 
                 cursorName=getContentResolver().query(uri, null, null, null, null);
 
-
-
                 if(cursorName.moveToFirst()){
                     @SuppressLint("Range") String contactId = cursorName.getString(cursorName.getColumnIndex(ContactsContract.Contacts._ID));
                     @SuppressLint("Range") String contactName = cursorName.getString(cursorName.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
@@ -294,19 +284,9 @@ public class GuestListActivity extends AppCompatActivity {
                                 contactEmail=email;
 
                         }
-
-//                        if(isValidEmail(contactEmail)) {
-                           // addNewGuestToList(contactName, contactEmail);
                             txtGuestAdd.setText(contactName);
                             txtGuestEmailAdd.setText(contactEmail);
 
-//                        }
-//                        else{
-//                            Toast.makeText(GuestListActivity.this, "InValid Email address", Toast.LENGTH_SHORT).show();
-//                            cursorEmail.close();
-//                            cursorName.close();
-//                            return;
-//                        }
 
                         cursorEmail.close();
                     }
